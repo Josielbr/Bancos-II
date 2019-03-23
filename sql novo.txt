@@ -1,0 +1,75 @@
+CREATE TABLE Aluno (
+rua varchar(50),
+cidade varchar(50),
+uf varchar(2),
+bairro varchar(50),
+responsavel_legal varchar(50),
+telefone varchar(10),
+numero varchar(5),
+nome varchar(50),
+cpf varchar(11),
+cep varchar(10),
+id integer PRIMARY KEY
+);
+
+
+CREATE TABLE Turmas (
+id integer PRIMARY KEY,
+nome varchar(50),
+horario time,
+vigencia varchar(50)
+);
+
+CREATE TABLE Professor (
+id integer PRIMARY KEY,
+rua varchar(50),
+cidade varchar(50),
+uf varchar(2),
+bairro varchar(50),
+telefone varchar(10),
+numero varchar(5),
+nome varchar(50),
+cpf varchar(11),
+cep varchar(10)
+);
+
+CREATE TABLE Curso (
+nome varchar(50),
+modalidade varchar(50),
+id integer PRIMARY KEY
+);
+
+
+CREATE TABLE matricula (
+id integer,
+professor_id integer,
+turma_id integer,
+FOREIGN KEY(turma_id) REFERENCES Turmas (id),
+FOREIGN KEY(professor_id) REFERENCES Professor (id)
+);
+
+CREATE TABLE Professor_turma (
+id integer primary key,
+professor_id integer,
+turma_id integer,
+FOREIGN KEY(turma_id) REFERENCES Turmas (id),
+FOREIGN KEY(professor_id) REFERENCES Professor (id)
+);
+
+
+DELIMITER $$
+
+	CREATE PROCEDURE addPessoas()
+    BEGIN
+    	DECLARE N INT;
+        SET N = 1;
+        WHILE N < 1O DO
+    		INSERT INTO pessoas (nome) VALUES ('nome');
+            SET N = N + 1;
+        END WHILE;      
+    END $$
+DELIMITER ;
+
+
+call addPessoas();
+
